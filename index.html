@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedra, Papel, Tesoura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f8ff;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #placar {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pedra, Papel, Tesoura</h1>
+        <p>Escolha uma opção:</p>
+        <button onclick="jogar('pedra')">Pedra</button>
+        <button onclick="jogar('papel')">Papel</button>
+        <button onclick="jogar('tesoura')">Tesoura</button>
+
+        <div id="resultado"></div>
+        <div id="placar"></div>
+    </div>
+
+    <script>
+        let placarJogador = 0;
+        let placarComputador = 0;
+
+        function jogar(escolhaJogador) {
+            const opcoes = ['pedra', 'papel', 'tesoura'];
+            const escolhaComputador = opcoes[Math.floor(Math.random() * 3)];
+
+            let resultado = '';
+            if (escolhaJogador === escolhaComputador) {
+                resultado = 'Empate!';
+            } else if (
+                (escolhaJogador === 'pedra' && escolhaComputador === 'tesoura') ||
+                (escolhaJogador === 'papel' && escolhaComputador === 'pedra') ||
+                (escolhaJogador === 'tesoura' && escolhaComputador === 'papel')
+            ) {
+                resultado = `Você venceu! ${escolhaJogador} vence ${escolhaComputador}.`;
+                placarJogador++;
+            } else {
+                resultado = `Você perdeu! ${escolhaComputador} vence ${escolhaJogador}.`;
+                placarComputador++;
+            }
+
+            document.getElementById('resultado').innerHTML = resultado;
+            document.getElementById('placar').innerHTML = `Placar - Jogador: ${placarJogador}, Computador: ${placarComputador}`;
+        }
+    </script>
+</body>
+</html>
